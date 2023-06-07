@@ -1,0 +1,100 @@
+.favoritebutton {
+    border-radius: 50%;
+    color: white;
+}
+
+.mat-mdc-tab-group.mat-background-primary, .mat-mdc-tab-nav-bar.mat-background-primary {
+    --mat-mdc-tab-header-with-background-background-color: rgb(59, 176, 182);
+    --mat-mdc-tab-header-with-background-foreground-color: white;
+    width: 100%;
+}
+
+::ng-deep.mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mdc-tab-indicator__content--underline, .mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-tab-header-pagination-chevron, .mat-mdc-tab-group.mat-tabs-with-background>.mat-mdc-tab-header .mat-mdc-focus-indicator::before {
+    border-color: purple !important;
+}
+
+::ng-deep.mat-mdc-tab-label-container {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+#ticketstatus {
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#nomusic {
+    border-radius: 10px;
+    background-color: white;
+    color: red;
+}
+
+.container {
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 16px;
+    height: 32px;
+}
+
+.show {
+    overflow: visible;
+    height: auto;
+}
+
+.my-google-map{
+    width: 800px;
+    height: 500px;
+}
+
+.detailcard {
+    background-color:rgba(95, 100, 116, 0.439);
+    backdrop-filter: blur(20px);
+    width: 60%;
+}
+
+@media (max-width: 576px) {
+    .detailcard {
+        width: 95% !important;
+    }
+}
+
+.cardanchor {
+    color: rgb(36, 121, 249);
+    text-decoration: underline;
+}
+.cardanchor:visited {
+    color: rgb(36, 121, 249);
+}
+
+::ng-deep.mat-mdc-tab-list {
+    width: 100%;
+}
+
+#nomusicmessage {
+    background-color: white; 
+    border-radius: 25%;
+}
+
+@media (max-width: 576px) {
+    #albumline {
+        margin: auto !important;
+        justify-content: center;
+    }
+}
+
+#seatdiv {
+    margin: auto !important;
+}
+
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
+.moreless {
+    padding: 0;
+    position: relative;
+    top: 3px;
+    right: 5px;
+}

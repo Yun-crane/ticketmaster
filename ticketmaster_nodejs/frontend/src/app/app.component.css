@@ -1,0 +1,17 @@
+.nav-item {
+    text-align: right;
+}
+
+.main {
+    background-image: url('../assets/background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.nav-item.active
+{
+  border:1px solid white;
+  border-radius: 10px;
+}

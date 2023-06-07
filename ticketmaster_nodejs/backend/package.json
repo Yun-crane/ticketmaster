@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {},
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "geohash": "^0.0.1",
+    "ngeohash": "^0.6.3",
+    "node-fetch": "^3.3.1",
+    "path": "^0.12.7",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}

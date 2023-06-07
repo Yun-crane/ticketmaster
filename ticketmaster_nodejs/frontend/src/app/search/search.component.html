@@ -1,0 +1,57 @@
+<!--<p>search works!</p>-->
+
+<div id="searchbox" class="card mt-5 mx-auto" style="width: 40%; margin-bottom: 80px;">
+    <h3 class="card-title mt-5 mx-auto text-white" id="banner">Events Search</h3>
+    <hr  class="mx-auto mb-1" width="94%" color="white">
+    <div class="card-body">
+        <form [formGroup]="searchform" (ngSubmit)="formsubmit()" ngNativeValidate>
+            <div class="form-row mb-3">
+                <label class="req" for="inputkeyword">Keyword</label>
+                <input id="inputkeyword" class="form-control" formControlName="keyword" type="text" required matInput [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let key of autocompleteresults" [value]="key">
+                        <span>{{key}}</span>
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-sm-6 mb-3">
+                    <label for="inputdistance" style="color: #98d7f7;">Distance</label>
+                    <input id="inputdistance" class="form-control" formControlName="distance" type="number" [placeholder]="defaultdist">
+                </div>
+                <div class="col-sm-5 mr-3">
+                    <label class="req" for="inputcategory">Category</label>
+                    <select id="inputcategory" class="form-control" formControlName="category" required>
+                        <option value="all" selected>Default</option>
+                        <option value="music">Music</option>
+                        <option value="sports">Sports</option>
+                        <option value="arts"> Arts & Theatre</option>
+                        <option value="film">Film</option>
+                        <option value="mix">Miscellaneous</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <label class="req" for="inputlocation">Location</label>
+                <input class="form-control" id="inputlocation" formControlName="location" type="text" required>
+            </div>
+            <div class="form-row mb-3">
+                <div>
+                    <input id="autodetect" formControlName="autocheck" type="checkbox">
+                    <label class="ml-2" for="autodetect" style="color: #98d7f7;">Auto-detect your location</label>                   
+                </div>
+            </div>
+            <div class="justify-content-center row mb-5">
+                <button type="submit" class="btn btn-danger">SUBMIT</button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button type="button" (click)="clearform()" class="btn btn-primary">CLEAR</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="showemptyresult" class="mx-auto">
+    <p id="noresult" class="text-center mt-5 mx-auto"><b>No results available</b></p>
+</div>
+<div><br/></div>
+<app-table *ngIf="showresulttable" [searchresult]="resultTable"></app-table>

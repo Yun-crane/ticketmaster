@@ -1,0 +1,20 @@
+#nofavorite{
+    background-color: white; 
+    width: 60%;
+    border-radius: 10px;
+}
+
+@media (max-width: 576px) {
+    #favtable {
+        width: 100% !important;
+    }
+}
+
+/*tr {
+    border-top: 1pt solid rgb(206, 203, 203) !important;
+}*/
+
+table tr{
+    box-shadow: 0 0 2px rgb(144, 143, 143);
+}
+

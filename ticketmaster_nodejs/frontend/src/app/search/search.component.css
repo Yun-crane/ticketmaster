@@ -1,0 +1,29 @@
+#searchbox {
+    background-color:rgba(95, 100, 116, 0.439);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+}
+
+#banner {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 40px;
+}
+
+.req{
+    color: #98d7f7;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.req::after{content:' *'; color:red;}
+
+@media (max-width: 576px) {
+    #searchbox {
+        width: 90% !important;
+    }
+}
+
+#noresult{
+    color: red; 
+    background-color: white; 
+    width: 50%;
+    border-radius: 10px;
+}
