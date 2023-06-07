@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<HEAD>
+    <style>
+        body{background-image: url("/static/bg.jpg"); background-size: 100%;}
+        #eventsearch {background-color:rgba(95, 100, 116, 0.439);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        width: 650px;
+        padding-bottom: 10px;
+        margin: 20px auto auto;}
+        #banner {color:white;
+            text-align: center;
+            margin:auto;
+            padding-top: 25px;
+            padding-bottom: 10px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 100;
+        font-size: 40px;}
+        .box {border-radius: 8px;
+            border: 1px solid; height: 30px;
+            border-color: white;
+        background-color: transparent;
+        color:white;
+        margin-top: 8px;
+        text-indent: 10px;
+        font-size: 18px;
+        }
+        fieldset {border: transparent;}
+        fieldset.inline {display: inline-block; width: 650px;}
+        .title{color: #98d7f7; font-size: 18px;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+        .nece{color: #98d7f7; font-size: 18px;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+        .nece::after{content:'*'; color:red;}
+        .searchbutton{color: white;
+        background-color: rgb(248, 126, 32);
+        border-radius: 8px;
+        padding: 12px 26px;
+        text-align: center;
+        font-size: 18px;
+        }
+        .searchbutton:hover{
+        filter: brightness(120%)
+        }
+        .clearbutton{color: white;
+        background-color: rgb(76, 105, 249);
+        border-radius: 8px;
+        padding: 12px 26px;
+        text-align: center;
+        font-size: 18px;}
+        .clearbutton:hover{
+            filter: brightness(120%);
+        }
+        table {
+            margin: 30px auto auto;
+            border: solid 1px black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th {
+            width: 200px;
+            height: 40px;
+            border: solid 1px black;
+            background-color: gainsboro;
+        }
+        th.date {
+            width: 160px;
+        }
+        th.image {
+            width: 160px;
+        }
+        th.eventname {
+            width: 460px;
+        }
+        th.genre {
+            width: 80px;
+        }
+        th.venue {
+            width: 240px;
+        }
+        td {
+            border: solid 1px black;
+            height: 80px;
+        }
+        img.eventimg {
+            width: 100px;
+            height: 50px;
+        }
+        #events {
+            background-color: white;
+            width: 1100px;
+            margin: 30px auto auto;
+            text-align: center;
+        }
+        #prop {
+            color: red;
+            font-weight: 400;
+            font-size: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+        #eventdetail {
+        background-color:rgba(95, 100, 116, 0.439);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        width: 940px;
+        height: 100%;
+        margin: 50px auto auto;
+        }
+        #eventtitle {color:white;
+            text-align: center;
+            margin:auto;
+            padding-top: 25px;
+            padding-bottom: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 100;
+        font-size: 30px;}
+        .cardhead {color: rgb(169, 245, 250); font-size: 20px;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .left {
+            float: left;
+            width: 300px;
+            margin-left: 40px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background-color: transparent;
+        }
+        .right {
+            float: right;
+            width: 500px;
+            margin-right: 20px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: transparent;
+        }
+        #seatmap {
+        width: 100%;
+        height: auto;
+        }
+        #cardstatus {
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+        }
+        .cardtext {
+            color: white;
+            font-size: 15px;
+            margin-top: 5px;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .cardanchor {
+            color: rgb(84, 185, 243);
+            text-decoration: none;
+        }
+        #showv {
+            height: 80px;
+            width: 270px;
+            text-align: center;
+            margin: 20px auto auto;
+            background-color: transparent;
+            color: white;
+            font-size: 25px;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #rbox {
+            border: solid 1px white;
+            border-top: transparent;
+            border-left: transparent;
+            margin: -10px auto auto;
+            width: 40px;
+            height: 40px;
+            transform: rotate(45deg);
+        }
+        #venuetitle {color:black;
+            text-align: center;
+            text-decoration: underline;
+            margin:auto;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 100;
+        font-size: 30px;}
+        #venuetitle::before {
+            content: "b";
+            color: transparent;
+            text-decoration: underline;
+        }
+        #venuetitle::after {
+            content: "a";
+            color: transparent;
+            text-decoration: underline;
+        }
+        #venuedetail {
+        background-color:white;
+        border-radius: 20px;
+        border: black solid 1px;
+        text-align: center;
+        width: 940px;
+        margin: 50px auto auto;
+        font-size: 30px;
+        }
+        #inner {
+        background-color:white;
+        border-radius: 20px;
+        border: black solid 1px;
+        margin: 10px;
+        }
+        #venueimg {
+            text-align: center;
+            margin: auto;
+            width: 100px;
+            height: 100px;
+        }
+        table.venue {
+            border:transparent;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th.venue {
+            border: transparent;
+        }
+        td.venue {
+            border: transparent;
+        }
+        td#td11 {
+            border-right: 1px black solid;
+            width: 50%;
+            padding-right: 10px;
+        }
+        td#td21 {
+            border-right: 1px black solid;
+            text-align: center;
+            font-size: 25px;
+            width: 50%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        td#td12 {
+            vertical-align: top;
+            text-align: center;
+            padding-top: 30px;
+            margin: auto;
+            border-left: 1px black solid;
+            font-size: 25px;
+            width: 50%;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        #adth {
+            background-color: white;
+            vertical-align: top;
+            padding-top: 0px;
+            border: transparent;
+            font-size: 20px;
+            width: 40%;
+        }
+        #wholeaddress {
+            border: transparent;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* .venue tr {
+            height: 60%;
+        } */
+        #addr {
+            border: transparent;
+            text-align: left;
+            height: 60%;
+        }
+        #city {
+            border: transparent;
+            text-align: left;
+            height: 60%;
+        }
+        #pcode {
+            border: transparent;
+            text-align: left;
+            height: 60%;
+        }
+        #noinfo {
+            color: black;
+        }
+    </style>
+</HEAD>
+<html>
+    <body>
+        <div id="eventsearch">
+            <p id="banner">Events Search</p>
+            <hr width="90%">
+            <form id="wholeform" method="GET" onsubmit="searchclicked(); return false">
+                <fieldset>
+                    <br>
+                    <div style="padding-left: 22px;">
+                        <label class="nece">Keyword</label><br>
+                        <input type="text" id="keyword" class="box" size="63" style="width: 572px;" required><br>
+                    </div>
+                </fieldset>
+                <fieldset class="inline">
+                    <div style="float: left; padding-left: 22px;">
+                        <label class="title">Distance(miles)</label><br>
+                        <input type="number" class="box" id="distance" size="40" style="width: 190px;" placeholder="10">
+                    </div>
+                    <div style="float: right; margin-right: 50px;">
+                        <label class="nece">Category</label><br>
+                        <select id="category" class="box" style="width: 290px; border: 1px solid; height: 35px;" required>
+                            <option value="all">Default</option>
+                            <option value="music">Music</option>
+                            <option value="sports">Sports</option>
+                            <option value="artstheatre">Arts & Theatre</option>
+                            <option value="film">Film</option>
+                            <option value="mix">Miscellaneous</option>
+                        </select>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div style="padding-left: 22px;">
+                        <label class="nece">Location</label> &nbsp;
+                        <input type="checkbox" id="auto-detect" name="auto-detect" onchange="autodetectchange(this)">
+                        <label style="color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Auto-Detect Location</label>
+                        <br>
+                        <input type="text" id="location" class="box" size="63" style="width: 572px;" required>
+                    </div>    
+                </fieldset>
+                <fieldset class="inline">
+                    <div style="padding-left: 22px;">
+                        <br>
+                        <button type="submit" class="searchbutton">SEARCH</button>
+                        <button type="button" class="clearbutton" onclick="clearform()">CLEAR</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div id="events"></div>
+    </body>
+</html>
+<script>
+    const searchclicked = () => {
+        const keywordVar = document.getElementById("keyword").value
+        const radiusVar = document.getElementById("distance").value
+        const categoryVar = document.getElementById("category").value
+        const locationVar = document.getElementById("location").value
+        //auto-detect location
+        if (document.getElementById("auto-detect").checked == true) {
+            fetchticketdata(keywordVar, radiusVar, categoryVar, latvar, longvar)
+            return
+        }
+        const Geocodingkey = "AIzaSyA6jlUondXF_ydECkNkcmhW3hEafH6FDe0"
+        let geourl = "https://maps.googleapis.com/maps/api/geocode/json?"
+        geourl += `address=${locationVar}&key=${Geocodingkey}`
+        fetch(geourl).then((response) => response.json()).then((data) => {console.log(data)
+        let geolocvar = data.results[0].geometry.location
+        return geolocvar}).then((locVar) => {
+            latvar = locVar.lat
+            longvar = locVar.lng
+            fetchticketdata(keywordVar, radiusVar, categoryVar, latvar, longvar)
+        }).catch((error) => console.log(error))
+    }
+    const autodetectlocation = () => {
+        const iPInfokey = "f24a7a3febf991"
+        const iPInfourl = `https://ipinfo.io?token=${iPInfokey}`
+        fetch(iPInfourl).then((response) => response.json()).then((data) => {console.log(data)
+        const locpair = data.loc.split(',')
+        latvar = locpair[0]
+        longvar = locpair[1]
+        console.log(latvar)
+        console.log(longvar)}).catch((error) => console.log(error))
+
+    }
+    const autodetectchange = (checkbox) => {
+        const locationBox = document.getElementById("location")
+        if (checkbox.checked == true) {
+            locationBox.value = ""
+            locationBox.hidden = true
+            locationBox.required = false
+            autodetectlocation()
+        } else {
+            locationBox.hidden = false
+            locationBox.required = true
+        }
+    }
+    const fetchticketdata = (keywordVar, radiusVar, categoryVar, latvar, longvar) => {
+        let searchURL = "/search?"
+        const requestObj = {
+            method: "Get", headers: {"Content-type": "application/json"}
+        }
+        const params = {ke: keywordVar, ra: radiusVar, ca: categoryVar, la: latvar, lo: longvar}
+        Object.keys(params).forEach(key => searchURL += `${key}=${params[key]}&`)
+        console.log(searchURL)
+        fetch(searchURL, requestObj).then((response) => response.json()).then((searchresults) => {
+            console.log(searchresults)
+            producetable(searchresults)
+        }).catch((error) => console.log(error))
+    }
+    const producetable = (searchresults) => {
+        const lasttable = document.getElementById("events")
+        if (lasttable != null) {
+            lasttable.innerHTML = null
+        }
+        let table1 = document.createElement("table")
+        table1.setAttribute("id","eventtable")
+        lasttable.appendChild(table1)
+        let row1 = document.createElement("tr")
+        table1.appendChild(row1)
+        genheaders(table1)
+        fillincontent(table1, searchresults)
+        table1.scrollIntoView({behavior: "smooth"})
+    }
+    const genheaders = (table) => {
+        manheader(table, 'Date', "date", 1, false)
+        manheader(table, 'Icon', "image", 2, false)
+        manheader(table, 'Event', "eventname", 3, true)
+        manheader(table, 'Genre', "genre", 4, true)
+        manheader(table, 'Venue', "venue", 5, true)
+    }
+    let orders = []
+    const manheader = (table, headtext, classname, colindex, sortable = false) => {
+        let head1 = document.createElement("th")
+        orders.push(true)
+        if (sortable == true) {
+            head1.style.cursor = "pointer"
+            head1.addEventListener("click", () => {
+                sorttable(table,colindex)
+            })
+        }
+        head1.innerHTML = headtext
+        head1.className = classname
+        table.rows[0].appendChild(head1)
+    }
+    const fillincontent = (table, searchresults) => {
+        if (searchresults._embedded != null) {
+        searchresults._embedded.events.forEach((curE, index) => {
+            let row = table.insertRow(index + 1)
+            if (curE.dates.start.localTime != null){
+            fillincell(row, 0, curE.dates.start.localDate+'<br>'+curE.dates.start.localTime)
+            }else{
+                fillincell(row, 0, curE.dates.start.localDate)
+            }
+            const iconhtml = `<img class="eventimg" src=${curE.images[0].url}>`
+            fillincell(row, 1, iconhtml)
+            fillincell(row, 2, curE.name, curE.id)
+            fillincell(row, 3, curE.classifications[0].segment.name)
+            fillincell(row, 4, curE._embedded.venues[0].name)
+        })
+    }else {
+        document.getElementById("events").innerHTML = "<p id=prop>No Records found</p>"
+    }
+    }
+    const fillincell = (row, colindex, cont, Eid = null) => {
+        let cell = row.insertCell(colindex)
+        cell.innerHTML = cont
+        if (Eid != null) {
+            cell.style.cursor = "pointer"
+            cell.addEventListener("click", () => {
+                fetcheventdetail(cont, Eid)
+            })
+        }
+    }
+    const clearform = () => {
+        const searchform = document.getElementById("wholeform")
+        searchform.reset()
+        const pprop = document.getElementById("prop")
+        if (pprop != null) {
+            pprop.remove()
+        }
+        const ptable = document.getElementById("eventtable")
+        if (ptable != null) {
+            ptable.remove()
+        }
+        const pdetail = document.getElementById("eventdetail")
+        if (pdetail != null) {
+            pdetail.remove()
+        }
+        const parrow = document.getElementById("showv")
+        if (parrow != null) {
+            parrow.remove()
+        }
+        const pvenue = document.getElementById("venuedetail")
+        if (pvenue != null) {
+            pvenue.remove()
+        }
+        const locbox = document.getElementById("location")
+        if (locbox.hidden == true) {
+            locbox.value = ""
+            locbox.hidden = false
+            locbox.required = true
+        }
+    }
+    const sorttable = (table, colindex) => {
+        const As = orders[colindex]
+        const cpr = As ? 1 : -1
+        let rows = Array.from(table.querySelectorAll("tr")).slice(1)
+        let cselector = `td:nth-child(${colindex})`
+        rows.sort((frow, srow) => {
+            const frowc = frow.querySelector(cselector).textContent.trim()
+            const srowc = srow.querySelector(cselector).textContent.trim()
+            return frowc > srowc ? cpr : -1 * (cpr)
+        })
+        orders[colindex] = !As
+        rows.forEach(crow =>
+        table.appendChild(crow))
+    }
+    const producecard = (cont, details) => {
+        let lastcard = document.getElementById("eventdetail")
+        if (lastcard != null) {
+            lastcard.remove()
+        }
+        let lastarrow = document.getElementById("showv")
+        if (lastarrow != null) {
+            lastarrow.remove()
+        }
+        let lastvinfo = document.getElementById("venuedetail")
+        if (lastvinfo != null) {
+            lastvinfo.remove()
+        }
+        const cardroot = document.createElement("div")
+        cardroot.innerHTML = `
+            <p id="eventtitle">${cont}</p>
+            <div class='left'>
+                <label id='labeldate' class='cardhead'>Date</label>
+                <p id='carddate' class='cardtext'></p>
+                <label id='labelat' class='cardhead'>Artist/Team</label>
+                <p id='cardat' class='cardtext'></p>
+                <label id='labelvenue' class='cardhead'>Venue</label>
+                <p id='cardvenue' class='cardtext'></p>
+                <label id='labelgenres' class='cardhead'>Genres</label>
+                <p id='cardgenres' class='cardtext'></p>
+                <label id='labelprice' class='cardhead'>Price Ranges</label>
+                <p id='cardprice' class='cardtext'></p>
+                <label id='labelstatus' class='cardhead'>Ticket Status</label>
+                <p id='cardstatus' class='cardtext'></p>
+                <label id='labelbuy'' class='cardhead'>Buy Tickets At:</label>
+                <p id='cardbuy' class='cardtext'></p>
+            </div>
+            <div class='right'>
+                <img id='seatmap'>    
+            </div>
+            <div style="clear:both"></div>
+        `
+        cardroot.setAttribute("id", "eventdetail")
+        document.body.append(cardroot)
+        if (details.dates.start.localDate!=null && details.dates.start.localTime!=null) {
+            const Edate = details.dates.start.localDate +' '+ details.dates.start.localTime
+            document.getElementById("carddate").innerText = Edate
+        }else{
+            document.getElementById('labeldate').remove()
+            document.getElementById('carddate').remove()
+        }
+        let atinfo = details._embedded.attractions
+        if (atinfo != null) {
+            let attext=''
+            const atindex = atinfo.length-1
+            atinfo.forEach((cartm,index) => {
+                attext += `<a class="cardanchor" target="_blank" href="${cartm.url}">${cartm.name}</a>`
+                if (index != atindex) {
+                    attext += ' | '
+                }
+            })
+            document.getElementById('cardat').innerHTML = attext
+        }else{
+            document.getElementById('labelat').remove()
+            document.getElementById('cardat').remove()
+        }
+        const showvenue = document.createElement("div")
+        showvenue.setAttribute("id", "showv")
+        document.body.append(showvenue)
+        if (details._embedded.venues != null) {
+            const Evenue = details._embedded.venues[0].name
+            document.getElementById("cardvenue").innerText = Evenue
+            document.getElementById('showv').innerHTML = "Show Venue Details<div id='rbox'></id>"
+            document.getElementById('showv').style.cursor = "pointer"
+            document.getElementById('showv').addEventListener("click", () => {
+                fetchvenuedetail(Evenue)
+            })
+        }else{
+            document.getElementById('labelvenue').remove()
+            document.getElementById('cardvenue').remove()
+            document.getElementById('showv').innerText = "No Venue found" 
+        }
+        let classinfo = details.classifications
+        if (classinfo != null) {
+            let genretext=''
+            if (classinfo[0].subGenre != null && classinfo[0].subGenre.name != 'Undefined') {
+                genretext += `${classinfo[0].subGenre.name} | `
+            }
+            if (classinfo[0].genre != null && classinfo[0].genre.name != 'Undefined') {
+                genretext += `${classinfo[0].genre.name} | `
+            }
+            if (classinfo[0].segment != null && classinfo[0].segment.name != 'Undefined') {
+                genretext += `${classinfo[0].segment.name} | `
+            }
+            if (classinfo[0].subType != null && classinfo[0].subType.name != 'Undefined') {
+                genretext += `${classinfo[0].subType.name} | `
+            }
+            if (classinfo[0].type != null && classinfo[0].type.name != 'Undefined') {
+                genretext += `${classinfo[0].type.name} | `
+            }
+            let genreresult = genretext.slice(0,-3)
+            document.getElementById("cardgenres").innerText = genreresult
+        }else{
+            document.getElementById('labelgenres').remove()
+            document.getElementById('cardgenres').remove()
+        }
+        if (details.priceRanges != null) {
+            const Erange = details.priceRanges[0].min + ' - ' + details.priceRanges[0].max + ' ' + details.priceRanges[0].currency
+            document.getElementById('cardprice').innerText = Erange
+        }else{
+            document.getElementById('labelprice').remove()
+            document.getElementById('cardprice').remove()
+        }
+        let statusinfo = details.dates.status.code
+        const staele = document.getElementById('cardstatus')
+        if (statusinfo != null) {
+            if (statusinfo == "onsale") {
+                staele.innerText = "On Sale"
+                staele.style.backgroundColor = "Green"
+                staele.style.width = "60px"
+            }
+            if (statusinfo == "offsale") {
+                staele.innerText = "Off Sale"
+                staele.style.backgroundColor = "Red"
+                staele.style.width = "60px"
+            }
+            if (statusinfo == "canceled") {
+                staele.innerText = "Canceled"
+                staele.style.backgroundColor = "Black"
+                staele.style.width = "70px"
+            }
+            if (statusinfo == "postponed") {
+                staele.innerText = "Postponed"
+                staele.style.backgroundColor = "Orange"
+                staele.style.width = "80px"
+            }
+            if (statusinfo == "rescheduled") {
+                staele.innerText = "Rescheduled"
+                staele.style.backgroundColor = "Orange"
+                staele.style.width = "90px"
+            }
+        }else{
+            document.getElementById('labelstatus').remove()
+            document.getElementById('cardstatus').remove()
+        }
+        if (details.url != null) {
+            document.getElementById('cardbuy').innerHTML = `<a class="cardanchor" target="_blank" href="${details.url}">Ticketmaster</a>`
+        }else{
+            document.getElementById('labelbuy').remove()
+            document.getElementById('cardbuy').remove()
+        }
+        if (details.seatmap != null) {
+            document.getElementById('seatmap').setAttribute("src",details.seatmap.staticUrl)
+        }else{
+            document.getElementById('seatmap').remove()
+        }
+        showvenue.scrollIntoView({behavior: "smooth"})
+    }
+    const fetcheventdetail = (cont, eventid) => {
+        let detailurl = `/detail?event_id=${eventid}`
+        const requestobj = {
+            method: "Get",
+            headers: {
+                "Content-type": "application/json"
+            }
+        }
+        fetch(detailurl, requestobj)
+        .then((response) => response.json())
+        .then((details) => {
+            console.log(details)
+            producecard(cont, details)
+        })
+    }
+    const fetchvenuedetail = (vname) => {
+        let venueurl = `/venue?venue_name=${vname}`
+        const request_obj = {
+            method: "Get",
+            headers: {
+                "Content-type": "application/json"
+            }
+        }
+        fetch(venueurl, request_obj)
+        .then((response) => response.json())
+        .then((vinfo) => {
+            console.log(vinfo)
+            showvenue(vname, vinfo)
+        })
+    }
+    const showvenue = (vname, vinfo) => {
+        let lastvcard = document.getElementById("venuedetail")
+        if (lastvcard != null) {
+            lastvcard.remove()
+        }
+        let venueguide = document.getElementById("showv")
+        if (venueguide != null) {
+            venueguide.remove()
+        }
+        const venueroot = document.createElement("div")
+        venueroot.setAttribute("id", "venuedetail")
+        document.body.append(venueroot)
+        if (vinfo._embedded != null) {
+            const vtitle = vinfo._embedded.venues[0].name
+            venueroot.innerHTML = `
+                <div id="inner">
+                    <p id="venuetitle">${vtitle}</p>
+                    <div id="vicon">
+                        <img id="venueimg">
+                    </div>
+                    <table class="venue" id="vcinfo">
+                            <tr><td class="venue" id="td11">
+                                <table id="wholeaddress">
+                                <TR><TH rowspan=3 id="adth">Address:</TH><TD id="addr"></TD></TR>
+                                <TR><TD id="city"></TD></TR>
+                                <TR><TD id="pcode"></TD></TR>
+                                </table>
+                                </td>
+                                <td class="venue" id="td12" rowspan=2><a id="moreinfo" class="cardanchor" target="_blank">More events at this venue</a>
+                                </td>
+                            </tr>
+                            <tr><td class="venue" id="td21">
+                                <a id="gmap" class="cardanchor" target="_blank">Open in Google Maps</a>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            `
+            if (vinfo._embedded.venues[0].images != null) {
+                document.getElementById('venueimg').setAttribute("src",vinfo._embedded.venues[0].images[0].url)
+            }else{
+                document.getElementById('venueimg').remove()
+            }
+            const vaddr = vinfo._embedded.venues[0].address
+            const vcity = vinfo._embedded.venues[0].city
+            const vstate = vinfo._embedded.venues[0].state
+            const vpcode = vinfo._embedded.venues[0].postalCode
+            let mapaddress = vtitle
+            if (vaddr!=null) {
+                document.getElementById('addr').innerText = vaddr.line1
+                mapaddress += vaddr.line1
+                mapaddress += ", "
+            }else{
+                document.getElementById('addr').innerText = "N/A"
+            }
+            if (vcity!=null && vstate!=null) {
+                document.getElementById('city').innerText = vcity.name + ', ' + vstate.stateCode
+                mapaddress += vcity.name
+                mapaddress += ", "
+                mapaddress += vstate.stateCode
+                mapaddress += ", "
+            }else{
+                document.getElementById('city').innerText = "N/A"
+            }
+            if (vpcode!=null){
+                document.getElementById('pcode').innerText = vpcode
+                mapaddress += vpcode
+            }else{
+                document.getElementById('pcade').innerText = "N/A"
+            }
+            const encodedaddress = encodeURIComponent(mapaddress)
+            const gmapurl = "https://www.google.com/maps/search/?api=1&query=" + encodedaddress
+            document.getElementById('gmap').setAttribute("href", gmapurl)
+            if (vinfo._embedded.venues[0].url != null) {
+                document.getElementById('moreinfo').setAttribute("href",vinfo._embedded.venues[0].url)
+            }else{
+                document.getElementById('td12').innerHTML = `<p/ id="noinfo">"N/A"<p>`
+            }
+        }else{
+            document.getElementById('venuedetail').innerText = "No Venue Information Available"
+        }
+        venueroot.scrollIntoView({behavior: "smooth"})
+    } 
+</script>
